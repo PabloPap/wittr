@@ -1,6 +1,6 @@
 import loadScripts from '../utils/loadScripts';
 import IndexController from './IndexController';
-
+// test tests
 const polyfillsNeeded = [];
 
 if (!('Promise' in self)) polyfillsNeeded.push('/js/polyfills/promise.js');
