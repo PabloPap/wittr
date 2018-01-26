@@ -100,3 +100,5 @@ dbPromise.then(function(db) {
 }).then(function(people) {
   console.log('Age people:', people);
 });
+
+// try git checkout idb-cursoring
