@@ -82,7 +82,13 @@ IndexController.prototype._showCachedMessages = function() {
     // in order of date, starting with the latest.
     // Remember to return a promise that does all this,
     // so the websocket isn't opened until you're done!
-  });
+      var tx = db.transaction('wittrs');
+      var wittrStore = tx.objectStore('wittrs');
+      var dateIndex = wittrStore.index('by-date');
+      return dateIndex.getAll().then(function(messages) {
+        indexController._postsView.addPosts(messages.reverse());
+      });
+    });  
 };
 
 IndexController.prototype._trackInstalling = function(worker) {
@@ -137,7 +143,7 @@ IndexController.prototype._openSocket = function() {
     });
   });
 
-  ws.addEventListener('close', function() {
+  ws.addEventListener('closnpm run servee', function() {
     // tell the user
     if (!indexController._lostConnectionToast) {
       indexController._lostConnectionToast = indexController._toastsView.show("Unable to connect. Retrying…");
